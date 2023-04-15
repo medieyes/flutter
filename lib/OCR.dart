@@ -7,28 +7,13 @@ import 'package:image_picker/image_picker.dart';
 
 void main() => runApp(OCRApp());
 
-class OCRApp extends StatelessWidget {
-  const OCRApp({Key? key}) : super(key: key);
+class OCRApp extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'OCR',
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-      ),
-      home: ImageSelectionScreen(),
-    );
-  }
-}
-
-class ImageSelectionScreen extends StatefulWidget {
-  @override
-  ImageSelectionScreenState createState() => ImageSelectionScreenState();
+  OCRAppState createState() => OCRAppState();
 }
 
 // 사진 촬영
-class ImageSelectionScreenState extends State<ImageSelectionScreen> {
+class OCRAppState extends State<OCRApp> {
   String result = ''; // OCR 결과를 저장할 변수
   Future<void> getImage() async {
     final pickedFile =
@@ -108,10 +93,6 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // SizedBox(
-            //   height: 5,
-            //   width: 5,
-            // ),
             Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
@@ -136,13 +117,6 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
                 ),
               ),
             )
-
-            // ElevatedButton(
-            //   onPressed: () {
-            //     getImage();
-            //   },
-            //   child: Text('사진 찍기'),
-            // ),
           ],
         ),
       ),
