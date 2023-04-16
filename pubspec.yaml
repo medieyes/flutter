@@ -33,13 +33,15 @@ dependencies:
   http: ^0.13.3
   uuid: ^3.0.5
   image_picker: ^0.8.4+4
+  shared_preferences: ^2.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   qr_code_scanner: ^1.0.1
+  direct_select: ^1.0.0
   alarm: ^0.2.9
-  
+
 
 
 

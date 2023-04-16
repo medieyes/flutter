@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:app/main.dart';
 
 void main() => runApp(OCRApp());
 
@@ -96,13 +97,31 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('문자 인식',
-            style: new TextStyle(
+        title: const Text('문자 인식',
+            style: TextStyle(
               fontSize: 30.0,
               color: Colors.black,
               fontWeight: FontWeight.bold,
             )),
         centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.popUntil(context, (route) => false);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MyApp()),
+              );
+            },
+            icon: const Icon(Icons.home),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -113,23 +132,23 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
             //   width: 5,
             // ),
             Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   result,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
-            Container(
+            SizedBox(
               width: 200,
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
                   getImage();
                 },
-                child: Text(
+                child: const Text(
                   '사진 찍기',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),

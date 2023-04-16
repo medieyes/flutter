@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:app/main.dart';
 import 'package:app/qrcamera.dart';
 
 class QRcodeWidget extends StatefulWidget {
@@ -20,15 +22,33 @@ class _QRcodeWidgetState extends State<QRcodeWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'QR코드 검색',
-            style: new TextStyle(
+            style: TextStyle(
               fontSize: 30.0,
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
           ),
           centerTitle: true,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.popUntil(context, (route) => false);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyApp()),
+                );
+              },
+              icon: const Icon(Icons.home),
+            ),
+          ],
         ),
         body: Container(
             width: MediaQuery.of(context).size.width,

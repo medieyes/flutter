@@ -1,8 +1,11 @@
-import 'package:app/qr.dart';
 import 'package:flutter/material.dart';
-import 'package:app/OCR.dart';
 
-void main() => runApp(MyApp());
+import 'package:app/OCR.dart';
+import 'package:app/search.dart';
+import 'package:app/qr.dart';
+import 'package:app/settings/settings_main.dart';
+
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -15,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: MyButton(),
+      home: const MyButton(),
     );
   }
 }
@@ -27,9 +30,9 @@ class MyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             '약리미',
-            style: new TextStyle(
+            style: TextStyle(
               fontSize: 30.0,
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -64,23 +67,22 @@ class MyButton extends StatelessWidget {
                                     builder: (context) => QRcodeWidget()),
                               );
                             },
-                            child: Text(
-                              'QR코드 검색',
-                              style: new TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
                             style: ElevatedButton.styleFrom(
-                                primary:
-                                    Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                                backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
+                            child: const Text(
+                              'QR코드 검색',
+                              style: TextStyle(
+                                fontSize: 26.0,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -96,23 +98,22 @@ class MyButton extends StatelessWidget {
                             onPressed: () {
                               print('이미지 검색');
                             },
-                            child: Text(
-                              '이미지 검색',
-                              style: new TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
                             style: ElevatedButton.styleFrom(
-                                primary:
-                                    Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                                backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
+                            child: const Text(
+                              '이미지 검색',
+                              style: TextStyle(
+                                fontSize: 26.0,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -129,24 +130,28 @@ class MyButton extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () {
                               print('약 검색 button');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SearchApp()),
+                              );
                             },
-                            child: Text(
-                              '약 검색',
-                              style: new TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
                             style: ElevatedButton.styleFrom(
-                                primary:
-                                    Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                                backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
+                            child: const Text(
+                              '약 검색',
+                              style: TextStyle(
+                                fontSize: 26.0,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -167,23 +172,22 @@ class MyButton extends StatelessWidget {
                                     builder: (context) => const OCRApp()),
                               );
                             },
-                            child: Text(
-                              '글자 인식',
-                              style: new TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
                             style: ElevatedButton.styleFrom(
-                                primary:
-                                    Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                                backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
+                            child: const Text(
+                              '글자 인식',
+                              style: TextStyle(
+                                fontSize: 26.0,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -201,23 +205,22 @@ class MyButton extends StatelessWidget {
                             onPressed: () {
                               print('복용 알림 button');
                             },
-                            child: Text(
-                              '복용 알림',
-                              style: new TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
                             style: ElevatedButton.styleFrom(
-                                primary:
-                                    Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                                backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
+                            child: const Text(
+                              '복용 알림',
+                              style: TextStyle(
+                                fontSize: 26.0,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -233,23 +236,22 @@ class MyButton extends StatelessWidget {
                             onPressed: () {
                               print('검색 기록 button');
                             },
-                            child: Text(
-                              '검색 기록',
-                              style: new TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
                             style: ElevatedButton.styleFrom(
-                                primary:
-                                    Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                                backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
+                            child: const Text(
+                              '검색 기록',
+                              style: TextStyle(
+                                fontSize: 26.0,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -263,22 +265,28 @@ class MyButton extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           print('환경설정 button');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SettingsMain()
+                            ),
+                          );
                         },
-                        child: Text(
-                          '환경설정',
-                          style: new TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
                         style: ElevatedButton.styleFrom(
-                            primary: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                            backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             // padding: const EdgeInsets.all(10),
                             elevation: 0.0),
+                        child: const Text(
+                          '환경설정',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
                   ),

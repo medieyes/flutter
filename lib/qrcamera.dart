@@ -40,7 +40,7 @@ class _QRcameraWidgetState extends State<QRcameraWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("QR Code Scanner"),
+        title: const Text("QR Code Scanner"),
       ),
       body: Column(
         children: [
@@ -50,14 +50,12 @@ class _QRcameraWidgetState extends State<QRcameraWidget> {
                 key: qrKey,
                 onQRViewCreated: _onQRViewCreated,
               )),
-          Expanded(
+          const Expanded(
               flex: 2,
-              child: Container(
-                child: Center(
-                  child: Text(
-                    "QR코드를 카메라에 보여주세요",
-                    style: TextStyle(fontSize: 20),
-                  ),
+              child: Center(
+                child: Text(
+                  "QR코드를 카메라에 보여주세요",
+                  style: TextStyle(fontSize: 20),
                 ),
               )),
         ],
