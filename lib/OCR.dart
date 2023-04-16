@@ -12,14 +12,7 @@ class OCRApp extends StatelessWidget {
   const OCRApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'OCR',
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-      ),
-      home: ImageSelectionScreen(),
-    );
+    return ImageSelectionScreen();
   }
 }
 
