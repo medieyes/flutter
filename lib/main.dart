@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 
-import 'package:app/OCR.dart';
-import 'package:app/search.dart';
-import 'package:app/qr.dart';
+import 'package:app/ocr/OCR.dart';
+import 'package:app/search/search.dart';
+import 'package:app/qr/qr.dart';
 import 'package:app/settings/settings_main.dart';
+import 'package:app/alarms/alarm_main.dart';
+import 'package:alarm/alarm.dart';
+import 'dart:async';
+import 'package:flutter/services.dart';
 
-void main() => runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  await Alarm.init(showDebugLogs: true);
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -68,7 +78,8 @@ class MyButton extends StatelessWidget {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                                backgroundColor:
+                                    Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
@@ -99,7 +110,8 @@ class MyButton extends StatelessWidget {
                               print('이미지 검색');
                             },
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                                backgroundColor:
+                                    Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
@@ -137,7 +149,8 @@ class MyButton extends StatelessWidget {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                                backgroundColor:
+                                    Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
@@ -173,7 +186,8 @@ class MyButton extends StatelessWidget {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                                backgroundColor:
+                                    Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
@@ -203,10 +217,16 @@ class MyButton extends StatelessWidget {
                           width: 130,
                           child: ElevatedButton(
                             onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AlarmWidget()),
+                              );
                               print('복용 알림 button');
                             },
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                                backgroundColor:
+                                    Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
@@ -237,7 +257,8 @@ class MyButton extends StatelessWidget {
                               print('검색 기록 button');
                             },
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                                backgroundColor:
+                                    Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
@@ -268,12 +289,12 @@ class MyButton extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const SettingsMain()
-                            ),
+                                builder: (context) => const SettingsMain()),
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                            backgroundColor:
+                                Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),

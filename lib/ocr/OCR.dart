@@ -129,7 +129,8 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
                 child: Text(
                   result,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 50, fontWeight: FontWeight.bold),
                 )),
             const SizedBox(
               height: 50,

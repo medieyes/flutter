@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:app/main.dart';
-import 'package:app/qrcamera.dart';
+import 'package:app/qr/qrcamera.dart';
 
 class QRcodeWidget extends StatefulWidget {
   const QRcodeWidget({Key? key}) : super(key: key);

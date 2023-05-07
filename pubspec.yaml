@@ -41,6 +41,7 @@ dependencies:
   qr_code_scanner: ^1.0.1
   direct_select: ^1.0.0
   alarm: ^0.2.9
+  time_picker_sheet: ^0.0.2+1
 
 
 

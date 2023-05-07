@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 
 import 'package:app/main.dart';
-import 'package:app/searchPage.dart';
+import 'searchPage.dart';
 
 void main() => runApp(SearchApp());
 
