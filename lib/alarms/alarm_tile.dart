@@ -41,9 +41,9 @@ class AlarmTile extends StatelessWidget {
               Text(
                 title,
                 style: const TextStyle(
-                  fontSize: 28,
                   fontWeight: FontWeight.w500,
                 ),
+                textScaleFactor: 1.5,
               ),
               const Icon(Icons.keyboard_arrow_right_rounded, size: 35),
             ],

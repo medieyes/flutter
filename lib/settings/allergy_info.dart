@@ -3,19 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:app/main.dart';
-import './util/multi_select_flutter.dart';
 
 void main() => runApp(const AllergyInfo(title: '',));
-
-class Allergy {
-  final int id;
-  final String name;
-
-  Allergy({
-    required this.id,
-    required this.name,
-  });
-}
 
 class AllergyInfo extends StatefulWidget {
   const AllergyInfo({Key? key, required this.title}) : super(key: key);
@@ -26,73 +15,80 @@ class AllergyInfo extends StatefulWidget {
 }
 
 class _AllergyInfoState extends State<AllergyInfo> {
-  static final List<Allergy> _allergies = [
-    Allergy(id: 1, name: "해산물"),
-    Allergy(id: 2, name: "견과류"),
-    Allergy(id: 3, name: "곡류"),
-    Allergy(id: 4, name: "천식"),
-    Allergy(id: 5, name: "아토피"),
-    Allergy(id: 6, name: "비염"),
-    Allergy(id: 7, name: "혈압"),
-    Allergy(id: 8, name: "신부전증"),
-    Allergy(id: 9, name: "과민증"),
-    Allergy(id: 10, name: "당뇨"),
-    Allergy(id: 11, name: "암"),
-    Allergy(id: 12, name: "편두통"),
-    Allergy(id: 13, name: "간질환"),
-    Allergy(id: 14, name: "신장질환"),
-    Allergy(id: 15, name: "소화기질환"),
-    Allergy(id: 16, name: "호흡질환"),
-    Allergy(id: 17, name: "정신질환"),
-    Allergy(id: 18, name: "근육질환"),
-    Allergy(id: 19, name: "심혈관질환"),
-    Allergy(id: 20, name: "뇌혈관질환"),
-  ];
-  final _items = _allergies
-      .map((allergy) => MultiSelectItem<Allergy>(allergy, allergy.name))
-      .toList();
+  Map<String, dynamic> allergies = {
+    '해산물': false,
+    '견과류': false,
+    '곡류': false,
+    '천식': false,
+    '아토피': false,
+    '비염': false,
+    '혈압': false,
+    '신부전증': false,
+    '과민증': false,
+    '당뇨': false,
+    '암': false,
+    '편두통': false,
+    '간질환': false,
+    '신장질환': false,
+    '소화기질환': false,
+    '호흡질환': false,
+    '정신질환': false,
+    '근육질환': false,
+    '심혈관질환': false,
+    '뇌혈관질환': false,
+  };
 
-  List<Allergy> _selectedAllergies = [];
+  List<String> _selectedAllergies = [];
 
   _saveAllergies() async {
-    List<Map<String, dynamic>> allergyList = _selectedAllergies
-        .map((allergy) => {'id': allergy.id, 'name': allergy.name})
-        .toList();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedAllergies', json.encode(allergyList));
-    print(allergyList);
+    prefs.setString('allergies', json.encode(allergies));
+
+    for (String key in allergies.keys){
+      if (allergies[key] == true){
+        if (!_selectedAllergies.contains(key)){
+          _selectedAllergies.add(key);
+        }
+      } else {
+          if (_selectedAllergies.contains(key)){
+            _selectedAllergies.remove(key);
+          }
+      }
+    }
+    prefs.setStringList('_selectedAllergies', _selectedAllergies);
+    print(_selectedAllergies);
   }
 
   void loadSelectedAllergies() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? allergiesJson = prefs.getString('selectedAllergies');
-    print("allergiesJSON");
-    print(allergiesJson);
-    if (allergiesJson != null) {
-      List<dynamic> allergyList = json.decode(allergiesJson);
-      setState(() {
-        _selectedAllergies = allergyList.map((allergy) {
-          return Allergy(id: allergy['id'], name: allergy['name']);
-        }).toList();
-        print("_Selected");
-        int i = 0;
-        while (i<_selectedAllergies.length){
-          print(_selectedAllergies[i].name);
-          i++;
-        }
-      });
-      // _savedItems = _selectedAllergies
-      //     .map((allergy) => MultiSelectItem<Allergy>(allergy, allergy.name))
-      //     .toList();
-    } else {
-      _emptyAllergies();
-    }
-  }
 
-  void _emptyAllergies() {
     setState(() {
-      _selectedAllergies = [];
+      allergies = Map<String, dynamic>.from(prefs.getString('allergies') != null
+          ? json.decode(prefs.getString('allergies')!)
+          : {
+        '해산물': false,
+        '견과류': false,
+        '곡류': false,
+        '천식': false,
+        '아토피': false,
+        '비염': false,
+        '혈압': false,
+        '신부전증': false,
+        '과민증': false,
+        '당뇨': false,
+        '암': false,
+        '편두통': false,
+        '간질환': false,
+        '신장질환': false,
+        '소화기질환': false,
+        '호흡질환': false,
+        '정신질환': false,
+        '근육질환': false,
+        '심혈관질환': false,
+        '뇌혈관질환': false,
+      });
     });
+    print(allergies);
   }
 
   @override
@@ -159,52 +155,29 @@ class _AllergyInfoState extends State<AllergyInfo> {
                               )
                           )
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 2,
+                      ConstrainedBox(
+                          constraints: const BoxConstraints(
+                            minHeight: 35.0,
+                            maxHeight: 520.0,
+                          ),
+                        child: Scaffold(
+                          body: ListView(
+                            padding: const EdgeInsets.all(8.0),
+                            children: allergies.keys.map((String key) {
+                              return CheckboxListTile(
+                                title: Text(key),
+                                value: allergies[key],
+                                onChanged: (value) {
+                                  setState(() {
+                                    allergies[key] = value!;
+                                    _saveAllergies();
+                                  });
+                                },
+                              );
+                            }).toList(),
                           ),
                         ),
-                        child: Column(
-                          children: <Widget>[
-                            MultiSelectDialogField(
-                              listType: MultiSelectListType.CHIP,
-                              searchable: true,
-                              buttonText: const Text("질병 및 알러지 정보"),
-                              title: const Text("검색"),
-                              items: _items,
-                              onConfirm: (values) async {
-                                setState(() {
-                                  _selectedAllergies = values.cast<Allergy>();
-                                });
-                                _saveAllergies();
-
-                              },
-                              chipDisplay: MultiSelectChipDisplay(
-                                items: _items,
-                                onTap: (value) async {
-                                  setState(() {
-                                    _selectedAllergies.remove(value);
-                                  });
-                                  _saveAllergies();
-                                },
-                              ),
-                            ),
-                            _selectedAllergies.isEmpty
-                                ? Container(
-                                padding: const EdgeInsets.all(10),
-                                alignment: Alignment.centerLeft,
-                                child: const Text(
-                                  "선택된 질병 및 알러지 정보가 없습니다.",
-                                  style: TextStyle(color: Colors.black54),
-                                ))
-                                : Container(),
-                          ],
-                        ),
                       ),
-                      const SizedBox(height: 40),
                     ],
                   ),
                 )

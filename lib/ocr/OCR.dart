@@ -5,6 +5,7 @@ import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:app/main.dart';
+import 'package:app/audioutill/audioUtil.dart';
 
 void main() => runApp(OCRApp());
 
@@ -99,6 +100,7 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
+            AudioUtil.audioplay(); // 화면 전환 소리
             Navigator.pop(context);
           },
           icon: const Icon(Icons.arrow_back),
@@ -106,6 +108,7 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
         actions: [
           IconButton(
             onPressed: () {
+              AudioUtil.audioplay(); // 화면 전환 소리
               Navigator.popUntil(context, (route) => false);
               Navigator.push(
                 context,
@@ -140,6 +143,7 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
+                  AudioUtil.audioplay(); // 화면 전환 소리
                   getImage();
                 },
                 child: const Text(

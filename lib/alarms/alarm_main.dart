@@ -6,6 +6,7 @@ import 'package:app/alarms/alarm_ring.dart';
 import 'package:app/alarms/alarm_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:app/main.dart';
+import 'package:app/audioutill/audioUtil.dart';
 
 class AlarmWidget extends StatefulWidget {
   const AlarmWidget({Key? key}) : super(key: key);
@@ -45,6 +46,7 @@ class _AlarmWidgetState extends State<AlarmWidget> {
   }
 
   Future<void> navigateToAlarmScreen(AlarmSettings? settings) async {
+    AudioUtil.audioplay(); // 화면 전환 소리
     final res = await showModalBottomSheet<bool?>(
         context: context,
         isScrollControlled: true,
@@ -74,14 +76,15 @@ class _AlarmWidgetState extends State<AlarmWidget> {
         title: const Text(
           '복용 알람 ',
           style: TextStyle(
-            fontSize: 30.0,
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
+          textScaleFactor: 1.5,
         ),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
+            AudioUtil.audioplay(); // 화면 전환 소리
             Navigator.pop(context);
           },
           icon: const Icon(Icons.arrow_back),
@@ -125,33 +128,61 @@ class _AlarmWidgetState extends State<AlarmWidget> {
                 ),
               ),
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // FloatingActionButton(
-            //   onPressed: () {
-            //     final alarmSettings = AlarmSettings(
-            //       id: 42,
-            //       dateTime: DateTime.now(),
-            //       assetAudioPath:
-            //           'https://github.com/sphy1597/test1/raw/master/pretender.mp3',
-            //     );
-            //     Alarm.set(alarmSettings: alarmSettings);
-            //   },
-            //   backgroundColor: Colors.red,
-            //   heroTag: null,
-            //   child: const Text("RING NOW", textAlign: TextAlign.center),
-            // ),
-            FloatingActionButton(
-              onPressed: () => navigateToAlarmScreen(null),
-              child: const Icon(Icons.alarm_add_rounded, size: 33),
+
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.grey[50],
+        child: SizedBox(
+          height: 56.0,
+          child: ElevatedButton(
+            //QR코드 검색 버튼 누르면 실행되는 기능
+            onPressed: () => navigateToAlarmScreen(null),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                maximumSize: const Size(130, 130),
+                // padding: const EdgeInsets.all(10),
+                elevation: 0.0),
+            child: const Text(
+              '알람 설정',
+              style: TextStyle(
+                fontSize: 26.0,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ],
+          ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+      // floatingActionButton: Padding(
+      //   padding: const EdgeInsets.all(10),
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     children: [
+      //       // FloatingActionButton(
+      //       //   onPressed: () {
+      //       //     final alarmSettings = AlarmSettings(
+      //       //       id: 42,
+      //       //       dateTime: DateTime.now(),
+      //       //       assetAudioPath:
+      //       //           'https://github.com/sphy1597/test1/raw/master/pretender.mp3',
+      //       //     );
+      //       //     Alarm.set(alarmSettings: alarmSettings);
+      //       //   },
+      //       //   backgroundColor: Colors.red,
+      //       //   heroTag: null,
+      //       //   child: const Text("RING NOW", textAlign: TextAlign.center),
+      //       // ),
+      //       FloatingActionButton(
+      //         onPressed: () => navigateToAlarmScreen(null),
+      //         child: const Icon(Icons.alarm_add_rounded, size: 33),
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

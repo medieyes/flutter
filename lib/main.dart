@@ -1,5 +1,5 @@
+import 'package:app/search/searchHistory.dart';
 import 'package:flutter/material.dart';
-
 import 'package:app/ocr/OCR.dart';
 import 'package:app/search/search.dart';
 import 'package:app/qr/qr.dart';
@@ -8,11 +8,13 @@ import 'package:app/alarms/alarm_main.dart';
 import 'package:alarm/alarm.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
+import 'package:app/audioutill/audioUtil.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
+  // AudioUtil.setaudio();
   await Alarm.init(showDebugLogs: true);
   runApp(const MyApp());
 }
@@ -43,10 +45,10 @@ class MyButton extends StatelessWidget {
           title: const Text(
             '약리미',
             style: TextStyle(
-              fontSize: 30.0,
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
+            textScaleFactor: 1.5,
           ),
           centerTitle: true,
         ),
@@ -69,8 +71,10 @@ class MyButton extends StatelessWidget {
                           height: 130,
                           width: 130,
                           child: ElevatedButton(
+                            //QR코드 검색 버튼 누르면 실행되는 기능
                             onPressed: () {
                               print('QR코드 검색 button');
+                              AudioUtil.audioplay(); // 화면 전환 소리
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -86,13 +90,30 @@ class MyButton extends StatelessWidget {
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
-                            child: const Text(
-                              'QR코드 검색',
-                              style: TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                                child: Column(
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                      child: Image(
+                                        image: AssetImage('assets/images/qr_code.png'),
+                                        width: 40.0,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.zero,
+                                      child: Text(
+                                        'QR코드 검색',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textScaleFactor: 1.5,
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
                         ),
@@ -107,6 +128,7 @@ class MyButton extends StatelessWidget {
                           width: 130,
                           child: ElevatedButton(
                             onPressed: () {
+                              AudioUtil.audioplay();
                               print('이미지 검색');
                             },
                             style: ElevatedButton.styleFrom(
@@ -118,13 +140,30 @@ class MyButton extends StatelessWidget {
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
-                            child: const Text(
-                              '이미지 검색',
-                              style: TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                                child: Column(
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                      child: Image(
+                                        image: AssetImage('assets/images/pill.png'),
+                                        width: 40.0,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.zero,
+                                      child: Text(
+                                        '이미지 검색',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textScaleFactor: 1.5,
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
                         ),
@@ -141,6 +180,7 @@ class MyButton extends StatelessWidget {
                           width: 130,
                           child: ElevatedButton(
                             onPressed: () {
+                              AudioUtil.audioplay();
                               print('약 검색 button');
                               Navigator.push(
                                 context,
@@ -157,13 +197,30 @@ class MyButton extends StatelessWidget {
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
-                            child: const Text(
-                              '약 검색',
-                              style: TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                                child: Column(
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                      child: Image(
+                                        image: AssetImage('assets/images/search.png'),
+                                        width: 40.0,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.zero,
+                                      child: Text(
+                                        '약 검색',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textScaleFactor: 1.5,
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
                         ),
@@ -178,6 +235,7 @@ class MyButton extends StatelessWidget {
                           width: 130,
                           child: ElevatedButton(
                             onPressed: () {
+                              AudioUtil.audioplay();
                               print('글자 인식 button');
                               Navigator.push(
                                 context,
@@ -194,13 +252,30 @@ class MyButton extends StatelessWidget {
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
-                            child: const Text(
-                              '글자 인식',
-                              style: TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                                child: Column(
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                      child: Image(
+                                        image: AssetImage('assets/images/ocr.png'),
+                                        width: 40.0,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.zero,
+                                      child: Text(
+                                        '글자 인식',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textScaleFactor: 1.5,
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
                         ),
@@ -217,6 +292,7 @@ class MyButton extends StatelessWidget {
                           width: 130,
                           child: ElevatedButton(
                             onPressed: () {
+                              AudioUtil.audioplay();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -233,13 +309,30 @@ class MyButton extends StatelessWidget {
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
-                            child: const Text(
-                              '복용 알림',
-                              style: TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                                child: Column(
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                      child: Image(
+                                        image: AssetImage('assets/images/alarm.png'),
+                                        width: 40.0,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.zero,
+                                      child: Text(
+                                        '복용 알림',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textScaleFactor: 1.5,
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
                         ),
@@ -254,7 +347,12 @@ class MyButton extends StatelessWidget {
                           width: 130,
                           child: ElevatedButton(
                             onPressed: () {
+                              AudioUtil.audioplay();
                               print('검색 기록 button');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SearchHistory()));
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor:
@@ -265,13 +363,30 @@ class MyButton extends StatelessWidget {
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
-                            child: const Text(
-                              '검색 기록',
-                              style: TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                                child: Column(
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                      child: Image(
+                                        image: AssetImage('assets/images/history.png'),
+                                        width: 40.0,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.zero,
+                                      child: Text(
+                                        '검색 기록',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textScaleFactor: 1.5,
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
                         ),
@@ -285,6 +400,7 @@ class MyButton extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
+                          AudioUtil.audioplay();
                           print('환경설정 button');
                           Navigator.push(
                             context,
