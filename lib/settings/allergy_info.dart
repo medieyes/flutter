@@ -104,10 +104,9 @@ class _AllergyInfoState extends State<AllergyInfo> {
           title: const Text(
             '질병 및 알러지 정보',
             style: TextStyle(
-              fontSize: 25.0,
               color: Colors.black,
               fontWeight: FontWeight.bold,
-            ),
+            ), textScaleFactor: 1.2,
           ),
           centerTitle: true,
           leading: IconButton(
@@ -136,7 +135,7 @@ class _AllergyInfoState extends State<AllergyInfo> {
               color: Colors.white,
             ),
             child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                padding: const EdgeInsets.all(20),
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Column(
@@ -146,11 +145,9 @@ class _AllergyInfoState extends State<AllergyInfo> {
                           child: Align(
                               alignment: Alignment.topLeft,
                               child: Text(
-                                  '알러지 추가',
-                                  style: TextStyle(
-                                    fontSize: 25.0,
-                                    color: Colors.black,
-                                  ),
+                                  '알러지 선택 (총 20종)',
+                                  style: TextStyle(color: Colors.black),
+                                  textScaleFactor: 1.4,
                                   textAlign: TextAlign.left
                               )
                           )

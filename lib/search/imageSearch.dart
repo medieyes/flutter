@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:app/main.dart';
-import 'package:app/audioutill/audioUtil.dart';
+import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:app/audioutill/audioUtil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:app/main.dart';
 import 'package:app/search/searchPage.dart';
 
 void main() => runApp(IMSAPP());
@@ -202,16 +203,21 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
                 Text("다음과 같은 알러지 유발 물질이 포함되어 있습니다.\n",
                     style: TextStyle(fontWeight: FontWeight.bold),
                     textScaleFactor: 1.1),
-                Text('{ ' + result + '}',
+                Text('" ' + result.trim() + ' "',
                     style: const TextStyle(color: Colors.red),
                     textScaleFactor: 1.5),
               ],
             ),
             actions: [
               TextButton(
-                child: Text("확인"),
+                child: const Text("확인",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 113, 201, 206),
+                    )),
                 onPressed: () {
                   Navigator.pop(context); // 경고창 닫기
+                  AudioUtil.audioplay(); // 화면 전환 소리
                   Navigator.push(
                       // 의약품 상세페이지로 이동
                       context,
@@ -225,6 +231,7 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
         },
       );
     } else {
+      AudioUtil.audioplay(); // 화면 전환 소리
       Navigator.push(
           // 의약품 상세페이지로 이동
           context,
@@ -241,10 +248,9 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
         title: const Text(
           '이미지 검색',
           style: TextStyle(
-            fontSize: 30.0,
             color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
+            fontWeight: FontWeight.bold),
+          textScaleFactor: 1.2,
         ),
         centerTitle: true,
         leading: IconButton(
@@ -268,21 +274,50 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
           ),
         ],
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            AudioUtil.audioplay(); // 화면 전환 소리
-            getImage();
-          },
-          child: const Text(
-            '사진 찍기',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+      // body: Center(
+      //   child: ElevatedButton(
+      //     onPressed: () {
+      //       AudioUtil.audioplay(); // 화면 전환 소리
+      //       getImage();
+      //     },
+      //     child: const Text(
+      //       '사진 찍기',
+      //       textAlign: TextAlign.center,
+      //       style: TextStyle(
+      //         fontSize: 30,
+      //         fontWeight: FontWeight.bold,
+      //       ),
+      //     ),
+      //   ),
+      // ),
+      body: const Padding(
+          padding: EdgeInsets.all(25),
+          child: Center(
+              child: Text(
+                  "약을 손바닥 위나 검정색을 배경으로 촬영해주세요.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      height: 1.4),
+                  textScaleFactor: 1.3
+              )
+          )
+      ),
+      bottomNavigationBar: BottomAppBar(
+          child: SizedBox(
+              height: 56.0,
+              child: ElevatedButton(
+                onPressed: () {
+                  AudioUtil.audioplay(); // 화면 전환 소리
+                  getImage();
+                },
+                child: const Text(
+                    '카메라 사용하기',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textScaleFactor: 1.5
+                ),
+              )
+          )
       ),
     );
   }

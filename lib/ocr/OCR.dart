@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:uuid/uuid.dart';
-import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:app/main.dart';
 import 'package:app/audioutill/audioUtil.dart';
+
+import 'package:app/main.dart';
 
 void main() => runApp(OCRApp());
 
@@ -91,12 +92,12 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('문자 인식',
+        title: const Text('글자 인식',
             style: TextStyle(
-              fontSize: 30.0,
               color: Colors.black,
               fontWeight: FontWeight.bold,
-            )),
+            ), textScaleFactor: 1.2,
+        ),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -119,49 +120,39 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // SizedBox(
-            //   height: 5,
-            //   width: 5,
-            // ),
-            Container(
+      body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   result,
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.left,
                   style: const TextStyle(
-                      fontSize: 50, fontWeight: FontWeight.bold),
-                )),
-            const SizedBox(
-              height: 50,
+                      fontWeight: FontWeight.bold,
+                      height: 1.4
+                    ),
+                    textScaleFactor: 1.3
+                )
             ),
-            SizedBox(
-              width: 200,
-              height: 50,
+          )
+      ),
+      bottomNavigationBar: BottomAppBar(
+          child: SizedBox(
+              height: 56.0,
               child: ElevatedButton(
                 onPressed: () {
                   AudioUtil.audioplay(); // 화면 전환 소리
                   getImage();
                 },
                 child: const Text(
-                  '사진 찍기',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  '카메라 사용하기',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ), textScaleFactor: 1.5
                 ),
-              ),
-            )
-
-            // ElevatedButton(
-            //   onPressed: () {
-            //     getImage();
-            //   },
-            //   child: Text('사진 찍기'),
-            // ),
-          ],
-        ),
+              )
+          )
       ),
     );
   }

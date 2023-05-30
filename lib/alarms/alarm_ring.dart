@@ -1,5 +1,5 @@
-import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
+import 'package:alarm/alarm.dart';
 
 class AlarmRing extends StatelessWidget {
   final AlarmSettings alarmSettings;

@@ -55,10 +55,10 @@ class _QRcameraWidgetState extends State<QRcameraWidget> {
         title: const Text(
           "QR코드 카메라",
           style: TextStyle(
-            fontSize: 30.0,
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
+          textScaleFactor: 1.2,
           textAlign: TextAlign.center,
         ),
       ),
@@ -69,16 +69,21 @@ class _QRcameraWidgetState extends State<QRcameraWidget> {
               child: QRView(
                 key: qrKey,
                 onQRViewCreated: _onQRViewCreated,
-              )),
+              )
+          ),
           Expanded(
               flex: 2,
               child: Center(
-                child: Text(
-                  result,
-                  style: TextStyle(fontSize: 20),
-                  textAlign: TextAlign.center,
-                ),
-              )),
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                  child: Text(
+                    result,
+                    textScaleFactor: 1.5,
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              )
+          ),
         ],
       ),
     );

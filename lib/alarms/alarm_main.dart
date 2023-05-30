@@ -1,12 +1,12 @@
+import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:app/audioutill/audioUtil.dart';
 
+import 'package:app/main.dart';
 import 'package:alarm/alarm.dart';
 import 'package:app/alarms/alarm_edit.dart';
 import 'package:app/alarms/alarm_ring.dart';
 import 'package:app/alarms/alarm_tile.dart';
-import 'package:flutter/material.dart';
-import 'package:app/main.dart';
-import 'package:app/audioutill/audioUtil.dart';
 
 class AlarmWidget extends StatefulWidget {
   const AlarmWidget({Key? key}) : super(key: key);
@@ -78,8 +78,7 @@ class _AlarmWidgetState extends State<AlarmWidget> {
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
-          ),
-          textScaleFactor: 1.5,
+          ), textScaleFactor: 1.2,
         ),
         centerTitle: true,
         leading: IconButton(
@@ -125,6 +124,7 @@ class _AlarmWidgetState extends State<AlarmWidget> {
                 child: Text(
                   "알람 없음",
                   style: Theme.of(context).textTheme.titleMedium,
+                  textScaleFactor: 1.5,
                 ),
               ),
       ),
@@ -137,20 +137,16 @@ class _AlarmWidgetState extends State<AlarmWidget> {
             //QR코드 검색 버튼 누르면 실행되는 기능
             onPressed: () => navigateToAlarmScreen(null),
             style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
                 maximumSize: const Size(130, 130),
                 // padding: const EdgeInsets.all(10),
                 elevation: 0.0),
             child: const Text(
               '알람 설정',
               style: TextStyle(
-                fontSize: 26.0,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
+              textScaleFactor: 1.5,
             ),
           ),
         ),
